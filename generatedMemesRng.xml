@@ -1,0 +1,21 @@
+<element name="generatedMemes" xmlns="http://relaxng.org/ns/structure/1.0"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <zeroOrMore>
+        <element name="meme">
+            <attribute name="id">
+                <data type="integer">
+                    <param name="minInclusive">1</param>
+                </data>
+            </attribute>
+            <element name="memeName">
+                <text/>
+            </element>
+            <element name="top">
+                <text/>
+            </element>
+            <element name="bottom">
+                <text/>
+            </element>
+        </element>
+    </zeroOrMore>
+</element>
