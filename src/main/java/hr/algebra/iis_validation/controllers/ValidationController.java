@@ -2,7 +2,7 @@ package hr.algebra.iis_validation.controllers;
 
 import hr.algebra.iis_validation.jaxb.JaxbFactory;
 import hr.algebra.iis_validation.jaxb.JaxbValidator;
-import hr.algebra.iis_validation.models.ValidationResponse;
+import hr.algebra.iis_validation.models.ValidationResult;
 import hr.algebra.iis_validation.repositories.RngFactory;
 import hr.algebra.iis_validation.repositories.RngRepository;
 import hr.algebra.iis_validation.repositories.XsdFactory;
@@ -27,9 +27,9 @@ public class ValidationController {
     private XsdFactory xsdFactory = new XsdRepository();
 
     @GetMapping(value = "/xsdValidation", produces = "application/json")
-    public ValidationResponse xsdValid() {
+    public ValidationResult xsdValid() {
         try {
-            return new ValidationResponse(xsdFactory.ValidateXsd(new StreamSource(getFile("generatedMemes.xml"))));
+            return new ValidationResult(xsdFactory.ValidateXsd(new StreamSource(getFile("generatedMemes.xml"))));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -38,22 +38,22 @@ public class ValidationController {
     private RngFactory rngFactory = new RngRepository();
 
     @GetMapping(value = "/rngValidation", produces = "application/json")
-    public ValidationResponse rngValid() {
-        return new ValidationResponse(rngFactory.ValidateRng(new File("generatedMemes.xml")));
+    public ValidationResult rngValid() {
+        return new ValidationResult(rngFactory.ValidateRng(new File("generatedMemes.xml")));
     }
 
     @PostMapping(value = "/fileUpload", produces = "application/json", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ValidationResponse uploadFile(@ModelAttribute MultipartFile uploadedXml) {
+    public ValidationResult uploadFile(@ModelAttribute MultipartFile uploadedXml) {
         if (uploadedXml == null) {
-            return new ValidationResponse("No file uploaded.");
+            return new ValidationResult("No file uploaded.");
         } else if (!uploadedXml.getOriginalFilename().endsWith("xml")) {
-            return new ValidationResponse("Wrong file type uploaded.");
+            return new ValidationResult("Wrong file type uploaded.");
         }
 
         try (FileOutputStream fos = new FileOutputStream("generatedMemes.xml")) {
             byte[] dataInBytes = uploadedXml.getBytes();
             fos.write(dataInBytes);
-            return new ValidationResponse("File successfully uploaded!");
+            return new ValidationResult("File successfully uploaded!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -61,9 +61,9 @@ public class ValidationController {
 
     private JaxbFactory jaxbValidator = new JaxbValidator();
     @GetMapping(value = "/jaxbValidation", produces = "application/json")
-    public ValidationResponse jaxbValid() {
+    public ValidationResult jaxbValid() {
         try {
-            return new ValidationResponse(jaxbValidator.ValidateXsd(new StreamSource(getFile("generatedMemes.xml"))));
+            return new ValidationResult(jaxbValidator.ValidateXsd(new StreamSource(getFile("generatedMemes.xml"))));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

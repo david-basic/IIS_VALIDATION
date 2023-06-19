@@ -16,7 +16,7 @@ import java.io.File;
 public class JaxbValidator implements JaxbFactory {
     @Override
     public String ValidateXsd(StreamSource xml) {
-        JAXBContext context;
+        JAXBContext context = null;
         
         try {
             context = JAXBContext.newInstance(GeneratedMemes.class);
@@ -25,7 +25,6 @@ public class JaxbValidator implements JaxbFactory {
             Schema schema = schemaFactory.newSchema(new File("generatedMemes.xsd"));
             unmarshaller.setSchema(schema);
             JAXBElement<GeneratedMemes> generatedMemesJAXBElement = (JAXBElement<GeneratedMemes>) unmarshaller.unmarshal(xml);
-            
         } catch (JAXBException | SAXException e) {
             e.printStackTrace();
             return "File is NOT valid!";
