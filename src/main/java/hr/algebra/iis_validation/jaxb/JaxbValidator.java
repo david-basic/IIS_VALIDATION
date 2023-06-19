@@ -16,7 +16,7 @@ import java.io.File;
 public class JaxbValidator implements JaxbFactory {
     @Override
     public String ValidateXsd(StreamSource xml) {
-        JAXBContext context = null;
+        JAXBContext context;
         
         try {
             context = JAXBContext.newInstance(GeneratedMemes.class);

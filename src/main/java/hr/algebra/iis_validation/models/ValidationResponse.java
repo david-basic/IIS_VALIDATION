@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ValidationResult {
-    private String validationResult;
+public class ValidationResponse {
+    private String validationResponse;
 }
