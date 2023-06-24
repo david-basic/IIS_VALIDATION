@@ -7,7 +7,7 @@
     </meme>
     <meme id="2">
         <memeName>Advice-Yoda</memeName>
-        <top>Now saying I'm not</top>
+        <top>Now saying I'm not,</top>
         <bottom>that aliens it was</bottom>
     </meme>
     <meme id="3">
@@ -24,5 +24,10 @@
         <memeName>Advice-Yoda</memeName>
         <top>High ground,</top>
         <bottom>Is good to have, tell you I</bottom>
+    </meme>
+    <meme id="6">
+        <memeName>Car-Salesman-Slaps-Hood</memeName>
+        <top>Slaps Golf 2 roof</top>
+        <bottom>This bad boy can carry so many cjepanice</bottom>
     </meme>
 </generatedMemes>
